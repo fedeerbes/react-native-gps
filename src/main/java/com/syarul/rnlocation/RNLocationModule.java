@@ -57,7 +57,7 @@ public class RNLocationModule extends ReactContextBaseJavaModule{
          * Location Callback as called by JS
          */
         @ReactMethod
-        public void startUpdatingLocation() {
+        public void startUpdatingLocation(long minTime, float minDistance) {
           mLocationListener = new LocationListener(){
             @Override
             public void onStatusChanged(String str,int in,Bundle bd){
@@ -112,7 +112,7 @@ public class RNLocationModule extends ReactContextBaseJavaModule{
 
 
         }};
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 500, 1, mLocationListener);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, minTime, minDistance, mLocationListener);
 
         }
 
