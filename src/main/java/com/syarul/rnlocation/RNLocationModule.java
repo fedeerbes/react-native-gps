@@ -123,49 +123,6 @@ public class RNLocationModule extends ReactContextBaseJavaModule{
 
         }
 
-        /*
-         * Last Location Callback as called by JS
-         */
-        @ReactMethod
-        public void getLastLocation() {
-          if (mLastLocation != null) {
-            try {
-              double longitude;
-              double latitude;
-              double speed;
-              double altitude;
-              double accuracy;
-              double course;
-
-              // Receive Longitude / Latitude from (updated) Last Location
-              longitude = mLastLocation.getLongitude();
-              latitude = mLastLocation.getLatitude();
-              speed = mLastLocation.getSpeed();
-              altitude = mLastLocation.getAltitude();
-              accuracy = mLastLocation.getAccuracy();
-              course = mLastLocation.getBearing();
-
-              Log.i(TAG, "Got new location. Lng: " +longitude+" Lat: "+latitude);
-
-             // Create Map with Parameters to send to JS
-              WritableMap params = Arguments.createMap();
-              params.putDouble("longitude", longitude);
-              params.putDouble("latitude", latitude);
-              params.putDouble("speed", speed);
-              params.putDouble("altitude", altitude);
-              params.putDouble("accuracy", accuracy);
-              params.putDouble("course", course);
-
-              // Send Event to JS to update Location
-              sendEvent(mReactContext, "lastLocation", params);
-            } catch (Exception e) {
-              e.printStackTrace();
-              Log.i(TAG, "Location services disconnected.");
-            }
-        }
-
-      }
-
         @ReactMethod
         public void stopUpdatingLocation() {
             try {
