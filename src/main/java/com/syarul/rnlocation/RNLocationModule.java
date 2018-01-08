@@ -7,7 +7,7 @@ import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.os.Bundle;
-import android.widget.Toast;
+// import android.widget.Toast;
 
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -106,11 +106,11 @@ public class RNLocationModule extends ReactContextBaseJavaModule{
                     // Send Event to JS to update Location
                     sendEvent(mReactContext, "locationUpdated", params);
 
-                    CharSequence text = latitude + " " + longitude + " " + speed;
-                    int duration = Toast.LENGTH_SHORT;
+//                     CharSequence text = latitude + " " + longitude + " " + speed;
+//                     int duration = Toast.LENGTH_SHORT;
 
-                    Toast toast = Toast.makeText(mReactContext, text, duration);
-                    toast.show();
+//                     Toast toast = Toast.makeText(mReactContext, text, duration);
+//                     toast.show();
                   } catch (Exception e) {
                     e.printStackTrace();
                     Log.i(TAG, "Location services disconnected.");
