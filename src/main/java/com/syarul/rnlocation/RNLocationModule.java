@@ -123,108 +123,108 @@ public class RNLocationModule extends ReactContextBaseJavaModule{
 
         }
 
-//    @ReactMethod
-//    public void getLocation() {
-//        CharSequence text = "getLocation";
-//        int duration = Toast.LENGTH_SHORT;
+   @ReactMethod
+   public void getLocation() {
+       // CharSequence text = "getLocation";
+       // int duration = Toast.LENGTH_SHORT;
+       //
+       // Toast toast = Toast.makeText(mReactContext, text, duration);
+       // toast.show();
+       mLocationListener = new LocationListener(){
+           @Override
+           public void onStatusChanged(String str,int in,Bundle bd){
+               // CharSequence text = "onStatusChanged";
+               // int duration = Toast.LENGTH_SHORT;
+               //
+               // Toast toast = Toast.makeText(mReactContext, text, duration);
+               // toast.show();
+           }
+
+           @Override
+           public void onProviderEnabled(String str){
+               CharSequence text = "onProviderEnabled";
+               int duration = Toast.LENGTH_SHORT;
+
+               Toast toast = Toast.makeText(mReactContext, text, duration);
+               toast.show();
+           }
+
+           @Override
+           public void onProviderDisabled(String str){
+               CharSequence text = "onProviderDisabled";
+               int duration = Toast.LENGTH_SHORT;
+
+               Toast toast = Toast.makeText(mReactContext, text, duration);
+               toast.show();
+           }
+
+           @Override
+           public void onLocationChanged(Location loc){
+               // CharSequence text = "onLocationChanged";
+               // int duration = Toast.LENGTH_SHORT;
+               //
+               // Toast toast = Toast.makeText(mReactContext, text, duration);
+               // toast.show();
+               mLastLocation = loc;
+               if (mLastLocation != null) {
+                   try {
+                       double longitude;
+                       double latitude;
+                       double speed;
+                       double altitude;
+                       double accuracy;
+                       double course;
+
+                       // Receive Longitude / Latitude from (updated) Last Location
+                       longitude = mLastLocation.getLongitude();
+                       latitude = mLastLocation.getLatitude();
+                       speed = mLastLocation.getSpeed();
+                       altitude = mLastLocation.getAltitude();
+                       accuracy = mLastLocation.getAccuracy();
+                       course = mLastLocation.getBearing();
+
+                       Log.i(TAG, "Got new location. Lng: " +longitude+" Lat: "+latitude);
+
+                       // Create Map with Parameters to send to JS
+                       WritableMap params = Arguments.createMap();
+                       params.putDouble("longitude", longitude);
+                       params.putDouble("latitude", latitude);
+                       params.putDouble("speed", speed);
+                       params.putDouble("altitude", altitude);
+                       params.putDouble("accuracy", accuracy);
+                       params.putDouble("course", course);
+
+                       // Send Event to JS to update Location
+                       sendEvent(mReactContext, "getLocation", params);
+                       //
+                       //  CharSequence text2 = latitude + " " + longitude + " " + speed + " " + course;
+                       //  int duration2 = Toast.LENGTH_SHORT;
+                       //  Toast toast2 = Toast.makeText(mReactContext, text2, duration2);
+                       // toast2.show();
+                   } catch (Exception e) {
+                       e.printStackTrace();
+                       Log.i(TAG, "Location services disconnected.");
+                   }
+               }
+
+
+           }};
+
+//        gpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+//        networkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 //
-//        Toast toast = Toast.makeText(mReactContext, text, duration);
-//        toast.show();
-//        mLocationListener = new LocationListener(){
-//            @Override
-//            public void onStatusChanged(String str,int in,Bundle bd){
-//                CharSequence text = "onStatusChanged";
-//                int duration = Toast.LENGTH_SHORT;
+//        if(!gpsEnabled && !networkEnabled)
+//            return false;
 //
-//                Toast toast = Toast.makeText(mReactContext, text, duration);
-//                toast.show();
-//            }
-//
-//            @Override
-//            public void onProviderEnabled(String str){
-//                CharSequence text = "onProviderEnabled";
-//                int duration = Toast.LENGTH_SHORT;
-//
-//                Toast toast = Toast.makeText(mReactContext, text, duration);
-//                toast.show();
-//            }
-//
-//            @Override
-//            public void onProviderDisabled(String str){
-//                CharSequence text = "onProviderDisabled";
-//                int duration = Toast.LENGTH_SHORT;
-//
-//                Toast toast = Toast.makeText(mReactContext, text, duration);
-//                toast.show();
-//            }
-//
-//            @Override
-//            public void onLocationChanged(Location loc){
-//                CharSequence text = "onLocationChanged";
-//                int duration = Toast.LENGTH_SHORT;
-//
-//                Toast toast = Toast.makeText(mReactContext, text, duration);
-//                toast.show();
-//                mLastLocation = loc;
-//                if (mLastLocation != null) {
-//                    try {
-//                        double longitude;
-//                        double latitude;
-//                        double speed;
-//                        double altitude;
-//                        double accuracy;
-//                        double course;
-//
-//                        // Receive Longitude / Latitude from (updated) Last Location
-//                        longitude = mLastLocation.getLongitude();
-//                        latitude = mLastLocation.getLatitude();
-//                        speed = mLastLocation.getSpeed();
-//                        altitude = mLastLocation.getAltitude();
-//                        accuracy = mLastLocation.getAccuracy();
-//                        course = mLastLocation.getBearing();
-//
-//                        Log.i(TAG, "Got new location. Lng: " +longitude+" Lat: "+latitude);
-//
-//                        // Create Map with Parameters to send to JS
-//                        WritableMap params = Arguments.createMap();
-//                        params.putDouble("longitude", longitude);
-//                        params.putDouble("latitude", latitude);
-//                        params.putDouble("speed", speed);
-//                        params.putDouble("altitude", altitude);
-//                        params.putDouble("accuracy", accuracy);
-//                        params.putDouble("course", course);
-//
-//                        // Send Event to JS to update Location
-//                        sendEvent(mReactContext, "getLocation", params);
-//
-//                         CharSequence text2 = latitude + " " + longitude + " " + speed + " " + course;
-//                         int duration2 = Toast.LENGTH_SHORT;
-//                         Toast toast2 = Toast.makeText(mReactContext, text2, duration2);
-//                        toast2.show();
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//                        Log.i(TAG, "Location services disconnected.");
-//                    }
-//                }
-//
-//
-//            }};
-//
-////        gpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-////        networkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-////
-////        if(!gpsEnabled && !networkEnabled)
-////            return false;
-////
-////        if(gpsEnabled && networkEnabled) {
-////            // DEBUG
-////            Log.d("GPS Connection", "Request GPS Data");
-////            locationManager.requestSingleUpdate(LocationManager.GPS_PROVIDER, gpsLocationListener, Looper.getMainLooper());
-////            gpsGetLocationTimeout = new Timer();
-////            gpsGetLocationTimeout.schedule(new GetNetworkLocation(), GPS_MAX_CONNECTION_TIME_MS);
-////        }
-//        locationManager.requestSingleUpdate( LocationManager.NETWORK_PROVIDER, mLocationListener, null );
-//    }
+//        if(gpsEnabled && networkEnabled) {
+//            // DEBUG
+//            Log.d("GPS Connection", "Request GPS Data");
+//            locationManager.requestSingleUpdate(LocationManager.GPS_PROVIDER, gpsLocationListener, Looper.getMainLooper());
+//            gpsGetLocationTimeout = new Timer();
+//            gpsGetLocationTimeout.schedule(new GetNetworkLocation(), GPS_MAX_CONNECTION_TIME_MS);
+//        }
+       locationManager.requestSingleUpdate( LocationManager.NETWORK_PROVIDER, mLocationListener, null );
+   }
 
         @ReactMethod
         public void stopUpdatingLocation() {
