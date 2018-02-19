@@ -7,7 +7,7 @@ import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.os.Bundle;
-// import android.widget.Toast;
+import android.widget.Toast;
 
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReactApplicationContext;

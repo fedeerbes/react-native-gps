@@ -1,6 +1,6 @@
 {
   "name": "react-native-gps",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "devDependencies": {
     "react-native": "^0.14"
   },
